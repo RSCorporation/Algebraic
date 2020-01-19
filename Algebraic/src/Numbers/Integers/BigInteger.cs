@@ -492,10 +492,59 @@ namespace Algebraic.Numbers.Integers
         #endregion
         #region Comparisons
 
-        public bool IsZero => sign == 0;
-        public bool IsNegative => sign < 0;
-        public bool IsPositive => sign > 0;
+        /// <summary>
+        /// Indicates whether the value of the current <see cref="BigInteger"/> object is an even number.
+        /// </summary>
+        /// <value><c>true</c> if the value of the <see cref="BigInteger"/> object is an even number; otherwise, <c>false</c>.</value>
+        /// <remarks>
+        /// This property is a convenience feature that indicates whether a BigInteger value is evenly divisible by two. It is the fastest way to check this feature
+        /// If the value of the current <see cref="BigInteger"/> object is 0, the property returns true.
+        /// </remarks>
         public bool IsEven => ptr == 0 || (bits[0] & 1) == 0;
+        /// <summary>
+        /// Indicates whether the value of the current <see cref="BigInteger"/> object is 1.
+        /// </summary>
+        /// <value><c>true</c> if the value of the <see cref="BigInteger"/> object is 1; otherwise, <c>false</c>.</value>
+        /// <remarks>This property offers significantly better performance than other comparisons with one.</remarks>
+        public bool IsOne => sign == 1 && ptr == 1 && bits[0] == 1;
+        /// <summary>
+        /// Indicates whether the value of the current <see cref="BigInteger"/> object is a power of two.
+        /// </summary>
+        /// <value><c>true</c> if the value of the <see cref="BigInteger"/> object is a power of two; otherwise, <c>false</c>.</value>
+        /// <remarks>This property determines whether a <see cref="BigInteger"/> value has a single non-zero bit set. This means that it returns <c>true</c> if the value of the current <see cref="BigInteger"/> object is 1 or any greater power of two.</remarks>
+        public bool IsPowerOfTwo
+        {
+            get
+            {
+                if (sign <= 0)
+                    return false;
+                for (int i = 0; i < ptr - 1; i++)
+                    if (bits[i] != 0)
+                        return false;
+                if ((bits[ptr - 1] & bits[ptr - 1] - 1) != 0)
+                    return false;
+                return true;
+            }
+        }
+        /// <summary>
+        /// Indicates whether the value of the current BigInteger object is 0.
+        /// </summary>
+        /// <value><c>true</c> if the value of the <see cref="BigInteger"/> object is 0; otherwise, <c>false</c>.</value>
+        /// <remarks>This property offers better performance than any other comparison to zero</remarks>
+        public bool IsZero => sign == 0;
+        /// <summary>
+        /// Indicates whether the value of the current BigInteger object is negative.
+        /// </summary>
+        /// <value><c>true</c> if the value of the <see cref="BigInteger"/> object is negative; otherwise, <c>false</c>.</value>
+        /// <remarks>This property offers better performance than comparison to zero</remarks>
+        public bool IsNegative => sign < 0;
+        /// <summary>
+        /// Indicates whether the value of the current BigInteger object is positive.
+        /// </summary>
+        /// <value><c>true</c> if the value of the <see cref="BigInteger"/> object is positive; otherwise, <c>false</c>.</value>
+        /// <remarks>This property offers better performance than comparison to zero</remarks>
+        public bool IsPositive => sign > 0;
+
 
         private int AbsoluteCompare(BigInteger other)
         {
