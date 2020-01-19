@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 #if PLATFORM_X86 || PLATFORM_ANYCPU
 using workType = System.UInt32;
@@ -292,6 +293,16 @@ namespace Algebraic.Numbers.Integers
             ShrinkPtr();
         }
 
+        /// <summary>
+        /// Gets the absolute value of the current <see cref="BigInteger"/> object and saves it to current object.
+        /// </summary>
+        /// <remarks>After calling this method current object will be equal to the return value of <see cref="Abs(BigInteger)"/></remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Abs()
+        {
+            if (sign < 0)
+                sign = 1;
+        }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Add(BigInteger other)
         {
@@ -418,6 +429,19 @@ namespace Algebraic.Numbers.Integers
         }
         #endregion
         #region Operations
+        /// <summary>
+        /// Gets the absolute value of a <see cref="BigInteger"/> object.
+        /// </summary>
+        /// <param name="value">A number.</param>
+        /// <returns>The absolute value of <paramref name="value"/>.</returns>
+        [Pure]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static BigInteger Abs(BigInteger value)
+        {
+            var res = new BigInteger(value);
+            res.Abs();
+            return res;
+        }
         public static BigInteger Pow(BigInteger value, int exponent)
         {
             //TODO: Implement
