@@ -303,6 +303,10 @@ namespace Algebraic.Numbers.Integers
             if (sign < 0)
                 sign = 1;
         }
+        /// <summary>
+        /// Adds <paramref name="other"/> to the current <see cref="BigInteger"/> object
+        /// </summary>
+        /// <param name="other">Value to add.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Add(BigInteger other)
         {
@@ -589,6 +593,13 @@ namespace Algebraic.Numbers.Integers
 
             return 0;
         }
+        /// <summary>
+        /// Compares two <see cref="BigInteger"/> values and returns an integer that indicates whether the first value is less than, equal to, or greater than the second value.
+        /// </summary>
+        /// <param name="l">The first value to compare.</param>
+        /// <param name="r">The second value to compare.</param>
+        /// <returns></returns>
+        public static int Compare(BigInteger l, BigInteger r) => l.CompareTo(r);
         public int CompareTo(BigInteger other)
         {
             if (sign != other.sign)
