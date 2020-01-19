@@ -28,6 +28,7 @@ namespace Algebraic.Numbers.Integers
         /// </summary>
         /// <param name="value">An array of byte values in little-endian order.</param>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is <c>null</c></exception>
+        /// <remarks>The individual bytes in the <paramref name="value"/> array should be in little-endian order, from lowest-order byte to highest-order byte.</remarks>
         public BigInteger(byte[] value)
         {
             if (value == null)
@@ -78,6 +79,7 @@ namespace Algebraic.Numbers.Integers
         /// Initializes a new instance of the <see cref="BigInteger"/> structure using a 32-bit signed integer value.
         /// </summary>
         /// <param name="value">A 32-bit signed integer.</param>
+        /// <remarks>There is no loss of precision when instantiating a <see cref="BigInteger"/> object by using this constructor.</remarks>
         public BigInteger(int value)
         {
             bits = new workType[OptimizationsManager.BigIntegerDefaultAllocation];
@@ -96,6 +98,7 @@ namespace Algebraic.Numbers.Integers
         /// Initializes a new instance of the <see cref="BigInteger"/> structure using a 64-bit signed integer value.
         /// </summary>
         /// <param name="value">A 64-bit signed integer.</param>
+        /// <remarks>There is no loss of precision when instantiating a <see cref="BigInteger"/> object by using this constructor.</remarks>
         public BigInteger(long value)
         {
             bits = new workType[OptimizationsManager.BigIntegerDefaultAllocation];
@@ -121,6 +124,7 @@ namespace Algebraic.Numbers.Integers
         /// Initializes a new instance of the BigInteger structure using an unsigned 32-bit integer value.
         /// </summary>
         /// <param name="value">An unsigned 32-bit integer value.</param>
+        /// <remarks>There is no loss of precision when instantiating a <see cref="BigInteger"/> object by using this constructor.</remarks>
         public BigInteger(uint value)
         {
             bits = new workType[OptimizationsManager.BigIntegerDefaultAllocation];
@@ -138,6 +142,7 @@ namespace Algebraic.Numbers.Integers
         /// Initializes a new instance of the BigInteger structure with an unsigned 64-bit integer value.
         /// </summary>
         /// <param name="value">An unsigned 64-bit integer.</param>
+        /// <remarks>There is no loss of precision when instantiating a <see cref="BigInteger"/> object by using this constructor.</remarks>
         public BigInteger(ulong value)
         {
             {
